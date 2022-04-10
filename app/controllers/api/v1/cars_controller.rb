@@ -1,6 +1,6 @@
 class Api::V1::CarsController < ApplicationController
   def index
-    @cars = Car.all
+    @cars = Car.made_by(params[:make]).order(price: params[:price] || :asc).includes(:car_range, :colors)
     render json: @cars
   end
 
